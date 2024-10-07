@@ -1,0 +1,17 @@
+<!-- templates/show_states.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>States in {{ zone }}</title>
+</head>
+<body>
+    <h1>States to Visit in {{ zone }}</h1>
+    <ul>
+        {% for state in states %}
+            <li>{{ state }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('states_by_zone') }}">Back to Zones</a>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!-- templates/my_itineraries.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Itineraries</title>
+</head>
+<body>
+    <h1>Your Itineraries</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Destination</th>
+                <th>How Many Places</th>
+                <th>Arrival Date</th>
+                <th>Departure Date</th>
+{#                <th>Places</th>#}
+            </tr>
+        </thead>
+        <tbody>
+            {% for itinerary in itineraries %}
+            <tr>
+                <td>{{ itinerary.destination }}</td>
+                <td>{{ itinerary.how_many }}</td>
+                <td>{{ itinerary.arrival_date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ itinerary.departure_date.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    <ul>
+                        {% for place in itinerary.places %}
+                        <li>{{ place.properties.name }}</li>  <!-- Adjust according to your places structure -->
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Tourism Website</title>
+    <link rel="stylesheet" href="/static/css/about.css">
+
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/states_by_zone">Destinations</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a class="contact-btn" href="#contact_form">Contact Us</a></li>
+{#                <li><button class="contact-btn" href="#contact_form">Contact Us</button></li>#}
+            </ul>
+
+        </nav>
+    </header>
+
+    <section class="about-section">
+        <h1>About Us</h1>
+        <p>We turn your dream destinations into memorable realities.</p>
+        <div class="about-images">
+            <img src="/static/img/indian-city-buildings-scene.jpg" alt="Tourism Image 1">
+            <img src="/static/img/tourists-taking-photos-beautiful-scenery-skiing-around-deogyusan.jpg" alt="Tourism Image 2">
+            <img src="/static/img/valletta-waterfront-malta.jpg" alt="Tourism Image 3">
+            <img src="/static/img/sunrise-vasco-da-gama-bridge-lisbon-portugal.jpg" alt="Tourism Image 4">
+        </div>
+    </section>
+
+    <section class="services-section">
+        <h2>We make sure your travel experiences are unforgettable</h2>
+        <div class="service-content">
+            <p>Founded in 2024, Discover Path is dedicated to showcasing the incredible diversity and beauty of India, making travel planning seamless and enjoyable for everyone. Our mission is to connect travelers with authentic experiences, a variety of transport options, and a wide range of accommodations—from charming homestays to luxurious resorts.
+
+                By harnessing the latest technology, Discover Path empowers local hosts and properties to reach a wider audience, helping them grow their businesses while offering travelers unique and memorable stays. With thousands of listings across every state, we’re here to make your journey through India as smooth as possible, backed by round-the-clock customer support. Whether you’re seeking the tranquility of Kerala’s backwaters or the vibrant energy of Delhi, ExploreIndia is your trusted partner in discovering the heart of this incredible country.</p>
+
+        </div>
+    </section>
+
+    <section class="mission-section">
+        <div class="mission-text">
+            <h2>Our Mission</h2>
+            <p>We empower travelers by providing personalized and unforgettable travel experiences. Our team is dedicated to making your journey as smooth and enjoyable as possible.</p>
+            <blockquote>"Travel far enough to meet yourself. Each new place is a chance to find a piece of who you are."</blockquote>
+        </div>
+    </section>
+
+    <section class="why-us-section">
+        <h2>Why Travel With Us?</h2>
+        <div class="why-us-features">
+            <div class="feature">
+                <!-- <img src="back-view-island-outdoors-tree-standing.jpg" alt="Professional Team"> -->
+                <h3>Professional Team</h3>
+                <p>Our experienced and dedicated team of travel professionals ensures every detail of your journey is meticulously planned and executed. From personalized itineraries to 24/7 support, we provide expert guidance to make your trip seamless and enjoyable</p>
+            </div>
+            <div class="feature">
+                <h3>Target Oriented</h3>
+                <p>We specialize in creating tailored travel experiences that match your interests and preferences. Whether you're seeking adventure, relaxation, or cultural immersion, our targeted approach ensures you get the most out of every destination.</p>
+            </div>
+            <div class="feature">
+
+                <h3>Success Guarantee</h3>
+                <p>With a high success rate in customer satisfaction, we pride ourselves on delivering exceptional travel experiences. Our track record speaks for itself, with countless happy travelers who’ve enjoyed unforgettable journeys thanks to our dedicated service</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="row" style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; margin-top: 40px; padding: 20px; background-color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+    <!-- Adjusted the image container to have a maximum width -->
+    <div class="image" style="flex: 1 1 40%; max-width: 40%;">
+        <img src="static/img/contact-img.svg" alt="Contact us logo" style="width: 100%; height: auto; border-radius: 10px;">
+    </div>
+
+    <!-- Adjusted the form container to share space with the image -->
+    <form action="/contact" id="contact_form" method="post" style="flex: 1 1 55%; max-width: 55%; padding: 1rem; box-shadow: 0 1rem 2rem rgba(0,0,0,.1); border-radius: .5rem; background-color: #fff;">
+        <div class="inputBox" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;">
+            <input type="text" name="contact_name" placeholder="Name" style="width: 48%; margin: 1rem 0; padding: 0.8rem; font-size: 1rem; color: #333; background: white; border: 1px solid #ccc; border-radius: .5rem;">
+            <input type="email" name="contact_email" placeholder="Email" style="width: 48%; margin: 1rem 0; padding: 0.8rem; font-size: 1rem; color: #333; background: white; border: 1px solid #ccc; border-radius: .5rem;">
+        </div>
+        <div class="inputBox" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;">
+            <input type="tel" name="contact_number" placeholder="Number" style="width: 48%; margin: 1rem 0; padding: 0.8rem; font-size: 1rem; color: #333; background: white; border: 1px solid #ccc; border-radius: .5rem;">
+            <input type="text" name="contact_subject" placeholder="Subject" style="width: 48%; margin: 1rem 0; padding: 0.8rem; font-size: 1rem; color: #333; background: white; border: 1px solid #ccc; border-radius: .5rem;">
+        </div>
+        <textarea name="contact_message" cols="30" rows="10" placeholder="Message" style="height: 100px; resize: none; width: 100%; margin: 1rem 0; padding: 0.8rem; font-size: 1rem; color: #333; background: white; border: 1px solid #ccc; border-radius: .5rem;"></textarea>
+        <input type="submit" class="btn" value="Send Message" style="width: 100%; padding: 0.8rem; background-color: #ffcc00; color: #fff; border: none; cursor: pointer; border-radius: .5rem; font-size: 1rem; margin-top: 1rem;">
+    </form>
+</div>
+
+
+</body>
+</html>

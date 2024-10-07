@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerary for {{ destination }}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/destinations.css') }}">
+
+    <style>
+        /* Custom CSS to adjust card height */
+        .card {
+            height: 400px; /* Adjust this value as needed for the desired card height */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo"><span>D</span>iscover<span>P</span>ath</a>
+
+    <nav class="navbar">
+        <a href="/home">Home</a>
+        <a href="/booking">Book</a>
+        <a href="/packages">Packages</a>
+        <a href="/contactus">Contact</a>
+    </nav>
+
+    <div class="icons">
+        <i class="fas fa-search" id="search-btn"></i>
+        <a href="/logout" class="btn" id="logout">Logout</a>
+    </div>
+
+    <form action="" method="post" class="search-bar-container">
+        <input type="search" id="search-bar" placeholder="search here...">
+        <label for="search-bar" class="fas fa-search"></label>
+    </form>
+</header>
+
+<!-- Itinerary Section -->
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <div class="w-100 text-center">
+            <img src="/static/img/pexels-andreimike-1271619.jpg"
+                 alt="{{ state }} Image"
+                 class="img-fluid w-100"
+                 style="border-radius: 0; max-height: 500px; object-fit: cover;">
+        </div>
+        <h1 class="display-4" style="font-size: 50px">Itinerary for {{ destination }}</h1>
+        <p class="lead" style="font-size: 20px">Number of People: {{ how_many }}</p>
+        <p class="lead" style="font-size: 20px">Travel Dates: {{ arrival_date }} to {{ departure_date }}</p>
+    </div>
+
+    <h2 class="text-center mb-4">Places to Visit</h2>
+
+    <div class="row">
+        {% for place in places %}
+            <div class="col-md-7 mb-4"> <!-- Set the column to take up the full row -->
+                <div class="card h-100 shadow-sm" style="border: 1px solid #ddd; border-radius: 8px;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title" style="font-weight: bold; font-size: 30px;">{{ place.properties.name }}</h5>
+                        <p class="card-text" style="font-size: 20px;">{{ place.properties.address_line1 }}</p>
+                        <p class="card-text" style="font-size: 20px;">Category: {{ place.properties.categories[0] }}</p>
+                        <a href="https://maps.google.com/?q={{ place.geometry.coordinates[1] }},{{ place.geometry.coordinates[0] }}" target="_blank" class="btn btn-primary mt-auto" style="background-color: #F045D6FF; border-color: #F045D6FF; font-size: 2rem;">View on Map</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p class="text-center text-muted" style="font-size: 1.25rem;">No places found for the specified destination.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="{{ url_for('static', filename='js/jquery-3.5.1.slim.min.js') }}"></script>
+
+<!-- Popper.js -->
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+
+<!-- Bootstrap JS -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+<!-- Custom JS -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

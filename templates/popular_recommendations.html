@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Popular Destinations</title>
+    <!-- Optional: Include Bootstrap for better styling -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+   <!-- Include navbar if you have one -->
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Most Popular Destinations</h1>
+
+        <!-- Check if there are popular destinations to display -->
+        {% if popular_destinations %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Destination Name</th>
+                        <th>Number of Selections</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through the popular destinations and display them in the table -->
+                    {% for destination in popular_destinations %}
+                        <tr>
+                            <td>{{ destination.name }}</td>
+                            <td>{{ destination.count }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No popular destinations found. Start adding destinations to your itineraries!</p>
+        {% endif %}
+
+        <a href="{{ url_for('home') }}" class="btn btn-primary mt-3">Back to Home</a>
+    </div>
+
+    <!-- Optional: Include Bootstrap JS and dependencies if using Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

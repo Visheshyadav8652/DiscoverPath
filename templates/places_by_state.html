@@ -1,0 +1,23 @@
+<!-- templates/places_by_state.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Places by State</title>
+</head>
+<body>
+    <h1>Places by State</h1>
+    <ul>
+        {% for item in places_by_state %}
+            <li>
+                <strong>{{ item['State'] }}</strong>
+                <ul>
+                    {% for place in item['Places'] %}
+                        <li><a href="{{ url_for('show_places', state=item['State']) }}">{{ place }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
