@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Clusters</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/destinations.css') }}">
+</head>
+<body>
+
+    <header>
+        <a href="/" class="logo"><span>T</span>ravel</a>
+
+        <nav class="navbar">
+            <a href="/home">Home</a>
+            <a href="/booking">Book</a>
+            <a href="/packages">Packages</a>
+            <a href="/contactus">Contact</a>
+        </nav>
+
+        <div class="icons">
+            <i class="fas fa-search" id="search-btn"></i>
+            <a href="/logout" class="btn" id="logout">Logout</a>
+        </div>
+
+        <form action="" method="post" class="search-bar-container">
+            <input type="search" id="search-bar" placeholder="search here...">
+            <label for="search-bar" class="fas fa-search"></label>
+        </form>
+    </header>
+
+    <!-- Clusters Section -->
+    <section class="home">
+        <h1 id="destination">State Clusters</h1>
+    </section>
+
+    <section class="cluster-form" style="font-size: 2rem">
+        <form action="/clusters" method="POST">
+            <h3>Select a State: </h3>
+            <label for="state_name" >State Name: </label>
+            <select name="state_name" id="state_name" class="inputBox">
+                {% for state in states %}
+                    <option value="{{ state }}">{{ state }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" class="btn" value="Find Cluster">
+        </form>
+    </section>
+
+    <!-- Show States in Same Cluster -->
+    {% if input_state %}
+        <section class="home" style="font-size: 1.5rem">
+            <h2>States in the Same Cluster as {{ input_state }}:</h2>
+            <ul class="cluster-list">
+                {% for state in cluster_states %}
+                    <li>{{ state }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endif %}
+
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+</body>
+</html>

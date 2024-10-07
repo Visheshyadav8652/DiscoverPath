@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Recommendations Based on Reviews and Rating</h1>
+
+    <form method="POST" action="{{ url_for('recommendations') }}">
+        <label for="place_name">Enter a place name:</label>
+        <input type="text" id="place_name" name="place_name" placeholder="Enter place name" required>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if place_name %}
+        <h2>Recommended places similar to "{{ place_name }}":</h2>
+        <ul>
+            {% for place in recommended_places %}
+                <li>{{ place['Name'] }} (Rating: {{ place['Google review rating'] }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</div>
+
+</body>
+</html>

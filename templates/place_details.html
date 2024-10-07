@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ place['Name'] }} Details</title>
+    <style>
+        .details-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            margin: 10px 0;
+            color: #333;
+        }
+        .btn-back {
+            display: block;
+            width: 100px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="details-container">
+    <h2>{{ place['Name'] }}</h2>
+    <p><strong>Zone:</strong> {{ place['Zone'] }}</p>
+    <p><strong>State:</strong> {{ place['State'] }}</p>
+    <p><strong>City:</strong> {{ place['City'] }}</p>
+    <p><strong>Type:</strong> {{ place['Type'] }}</p>
+    <p><strong>Establishment Year:</strong> {{ place['Establishment Year'] }}</p>
+    <p><strong>Time needed to visit (hrs):</strong> {{ place['Time needed to visit in hrs'] }}</p>
+    <p><strong>Google Review Rating:</strong> {{ place['Google review rating'] }}</p>
+    <p><strong>Entrance Fee (INR):</strong> {{ place['Entrance Fee in INR'] }}</p>
+    <p><strong>Airport within 50km Radius:</strong> {{ place['Airport with 50km Radius'] }}</p>
+    <p><strong>Weekly Off:</strong> {{ place['Weekly Off'] }}</p>
+    <p><strong>Significance:</strong> {{ place['Significance'] }}</p>
+    <p><strong>DSLR Allowed:</strong> {{ place['DSLR Allowed'] }}</p>
+    <p><strong>Number of Google Reviews (lakhs):</strong> {{ place['Number of Google reviews in lakhs'] }}</p>
+    <p><strong>Best Time to Visit:</strong> {{ place['Best Time to visit'] }}</p>
+    <a href="{{ url_for('dashboard') }}" class="btn-back">Back</a>
+</div>
+
+</body>
+</html>

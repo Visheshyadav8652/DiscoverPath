@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="static/css/style.css">
+    <title>Travel</title>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="logo"><span>D</span>iscover<span>P</span>ath</a>
+
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#book">Book</a>
+            <a href="#packages">Packages</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+
+        <div class="icons">
+            {% if session['user_id'] %}
+                <!-- Show the Logout button only if the user is logged in -->
+                <a href="/logout" class="btn" id="logout">Logout</a>
+            {% else %}
+                <!-- Show the Login button only if the user is not logged in -->
+                <i class="fas fa-user" id="login-btn"></i>
+            {% endif %}
+        </div>
+
+        <form action="" method="post" class="search-bar-container">
+            <input type="search" id="search-bar" placeholder="search here...">
+            <label for="search-bar" class="fas fa-search"></label>
+        </form>
+    </header>
+
+    <!-- Login form popup -->
+    <div class="login-form-container" id="#login">
+        <i class="fas fa-times" id="form-close"></i>
+
+        <form action="/login" method="post">
+            <h3>login</h3>
+            <input type="email" name="email" class="box" placeholder="enter your email...">
+            <input type="password" name="password" class="box" placeholder="enter your password">
+            <input type="submit" class="btn" value="Login Now">
+            <p>Don't have an account? <a href="/register">Register Now</a></p>
+        </form>
+    </div>
+
+    <!-- home section starts -->
+    <section class="home" id="home">
+        <div class="content">
+            <h3>Adventure is Worthwhile</h3>
+            <p>Discover new places with us, adventure awaits</p>
+            <a href="/states_by_zone" class="btn">Discover More</a>
+        </div>
+
+        <div class="photo-container">
+            <img src="static/img/pexels-riciardus-307008.jpg" alt="Home section background picture">
+        </div>
+    </section>
+
+    <!-- booking section starts -->
+    <section class="book" id="book">
+        <!-- Removed welcome message using session data -->
+        <section class="dashboard">
+        <div class="content">
+            <h2>Heyy {{ user_name }}!, Welcome to DiscoverPath</h2>
+            <p>Be ready to explore the beauty of Travelling with US!!!</p>
+        </div>
+        </section>
+        <h1 class="heading">
+            <span>p</span>
+            <span>l</span>
+            <span>a</span>
+            <span>n</span>
+            <span class="space"></span>
+            <span>i</span>
+            <span>t</span>
+            <span>i</span>
+            <span>n</span>
+            <span>e</span>
+            <span>r</span>
+            <span>y</span>
+        </h1>
+
+        <div class="row">
+            <div class="image">
+                <img src="static/img/travel_logo.png" alt="Booking travel logo">
+            </div>
+
+            <form  id="book_form" method="POST" >
+                <div class="inputBox">
+                    <h3>Where to?</h3>
+                    <input type="text" name="destination" placeholder="destination">
+                </div>
+                <div class="inputBox">
+                    <h3>How Many?</h3>
+                    <input type="number" name="how_many" placeholder="number of guests">
+                </div>
+                <div class="inputBox">
+                    <h3>Arrival Date: </h3>
+                    <input type="date" name="arrival_date">
+                </div>
+                <div class="inputBox">
+                    <h3>Departure Date: </h3>
+                    <input type="date" name="departure_date">
+                </div>
+                <input type="submit" value="Plan Itinery" class="btn">
+            </form>
+        </div>
+    </section>
+
+    <!-- packages section -->
+    <section class="packages" id="packages">
+        <h1 class="heading">
+            <span>r</span>
+            <span>e</span>
+            <span>c</span>
+            <span>o</span>
+            <span>m</span>
+            <span>m</span>
+            <span>e</span>
+            <span>n</span>
+            <span>d</span>
+            <span>a</span>
+            <span>t</span>
+            <span>i</span>
+            <span>o</span>
+            <span>n</span>
+            <span>s</span>
+        </h1>
+
+        <div class="box-container">
+
+    <div class="box">
+        <img src="{{url_for('static', filename='img/dalhousie.jpg')}}" alt="Dalhousie vacation package image">
+        <div class="content">
+            <h3> <i class="fas fa-map-marker-alt"></i>Dalhousie</h3>
+            <p>Dalhousie, a serene hill station in Himachal Pradesh, offers stunning views of the snow-capped Himalayas and a tranquil retreat away from the hustle and bustle of city life.</p>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+            </div>
+            <a href="london" class="btn">More Info</a>
+        </div>
+    </div>
+
+    <div class="box">
+        <img src="{{url_for('static', filename='img/ooty.jpg')}}" alt="Ooty vacation package image">
+        <div class="content">
+            <h3> <i class="fas fa-map-marker-alt"></i>Ooty</h3>
+            <p>Ooty, also known as Udhagamandalam, is a picturesque hill station in Tamil Nadu, famous for its tea gardens, lush green landscapes, and the charming Nilgiri Mountain Railway.</p>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+            </div>
+            <a href="/destinations/tokyo" class="btn">More Info</a>
+        </div>
+    </div>
+
+    <div class="box">
+        <img src="{{url_for('static', filename='img/nahargarh.jpg')}}" alt="Nahargarh vacation package image">
+        <div class="content">
+            <h3> <i class="fas fa-map-marker-alt"></i>Nahargarh</h3>
+            <p>Nahargarh Fort, perched on the rugged hills of Jaipur, Rajasthan, offers a panoramic view of the Pink City and a glimpse into the rich history of the region.</p>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+            </div>
+            <a href="/destinations/honolulu" class="btn">More Info</a>
+        </div>
+    </div>
+
+    <div class="box">
+        <img src="{{url_for('static', filename='img/leh.jpg')}}" alt="Leh Ladakh vacation package image">
+        <div class="content">
+            <h3> <i class="fas fa-map-marker-alt"></i>Leh Ladakh</h3>
+            <p>Leh Ladakh, located in the northernmost region of India, is known for its breathtaking landscapes, high-altitude passes, and vibrant Buddhist monasteries.</p>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+            </div>
+            <a href="/destinations/new_york_city" class="btn">More Info</a>
+        </div>
+    </div>
+
+    <div class="box">
+        <img src="{{url_for('static', filename='img/amber_palace.jpg')}}" alt="Amber Palace vacation package image">
+        <div class="content">
+            <h3> <i class="fas fa-map-marker-alt"></i>Amber Palace</h3>
+            <p>The Amber Palace, located in Jaipur, Rajasthan, is a majestic blend of Mughal and Rajput architecture, renowned for its intricate carvings, mirror work, and expansive courtyards.</p>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+            </div>
+            <a href="/destinations/paris" class="btn">More Info</a>
+        </div>
+    </div>
+</div>
+
+    </section>
+
+    <section class="packages" id="packages">
+        <h1 class="heading">
+            <span>e</span>
+            <span>x</span>
+            <span>p</span>
+            <span>l</span>
+            <span>o</span>
+            <span>r</span>
+            <span>e</span>
+            <span class="space"></span>
+            <span>i</span>
+            <span>n</span>
+            <span>d</span>
+            <span>i</span>
+            <span>a</span>
+        </h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <img src="{{url_for('static', filename='img/himachal.jpg')}}" alt="London vacation package image">
+                <div class="content">
+                    <h3> <i class="fas fa-map-marker-alt"></i>Himachal</h3>
+                    <p>Explore the beautiful hills of Himachal Pradesh.</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+{#                    <div class="price">$1,200 <span>$1,500</span></div>#}
+                    <a href="{{ url_for('show_places', state='Himachal Pradesh') }}" class="btn">More Info</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{url_for('static', filename='img/uttarakhand.jpg')}}" alt="Tokyo vacation package image">
+                <div class="content">
+                    <h3> <i class="fas fa-map-marker-alt"></i>Uttarakhand</h3>
+                    <p>Discover the serene beauty of Uttarakhand.</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+{#                    <div class="price">$1,800 <span>$2,300</span></div>#}
+                    <a href="{{ url_for('show_places', state='Uttarakhand') }}" class="btn">More Info</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{url_for('static', filename='img/rajasthan.jpg')}}" alt="Honolulu vacation package image">
+                <div class="content">
+                    <h3> <i class="fas fa-map-marker-alt"></i>Rajasthan</h3>
+                    <p>Experience the royal heritage of Rajasthan.</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+{#                    <div class="price">$800 <span>$1,000</span></div>#}
+                    <a href="{{ url_for('show_places', state='Rajasthan') }}" class="btn">More Info</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{url_for('static', filename='img/punjab.jpg')}}" alt="New York vacation package image">
+                <div class="content">
+                    <h3> <i class="fas fa-map-marker-alt"></i>Punjab</h3>
+                    <p>Explore the rich culture of Punjab.</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+{#                    <div class="price">$900 <span>$1,200</span></div>#}
+                    <a href="{{ url_for('show_places', state='Punjab') }}" class="btn">More Info</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{url_for('static', filename='img/gujarat.jpg')}}" alt="Paris vacation package image">
+                <div class="content">
+                    <h3> <i class="fas fa-map-marker-alt"></i>Gujarat</h3>
+                    <p>Witness the vibrant culture of Gujarat.</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+{#                    <div class="price">$900 <span>$1,350</span></div>#}
+                    <a href="{{ url_for('show_places', state='Gujarat') }}" class="btn">More Info</a>
+                </div>
+            </div>
+
+            <!-- Repeat for other packages -->
+
+        </div>
+    </section>
+
+    <section>
+        <div>
+            <iframe src="https://www.ftd.travel/travel-widgets/destination-of-the-day.php" target="_blank" align="middle" width="476" height="350"  frameborder="0" scrolling="no"></iframe>
+        </div>
+    </section>
+
+    <!-- contact section -->
+    <section class="contact" id="contact">
+        <h1 class="heading">
+            <span>c</span>
+            <span>o</span>
+            <span>n</span>
+            <span>t</span>
+            <span>a</span>
+            <span>c</span>
+            <span>t</span>
+            <span class="space"></span>
+            <span>u</span>
+            <span>s</span>
+        </h1>
+
+        <div class="row">
+            <div class="image">
+                <img src="static/img/contact-img.svg" alt="Contact us logo">
+            </div>
+
+            <form action="/contact" id="contact_form" method="post">
+                <div class="inputBox">
+                    <input type="text" name="contact_name" placeholder="name">
+                    <input type="email" name="contact_email" placeholder="email">
+                </div>
+                <div class="inputBox">
+                    <input type="tel" name="contact_number" placeholder="number">
+                    <input type="text" name="contact_subject" placeholder="subject">
+                </div>
+                <textarea name="contact_message" cols="30" rows="10" placeholder="message"></textarea>
+                <input type="submit" class="btn" value="Send Message">
+            </form>
+        </div>
+    </section>
+
+    <script src="static/js/script.js"></script>
+</body>
+</html>
