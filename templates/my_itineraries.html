@@ -1,40 +1,95 @@
-<!-- templates/my_itineraries.html -->
+{#<!-- templates/my_itineraries.html -->#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>My Itineraries</title>#}
+{#</head>#}
+{#<body>#}
+{#    <h1>Your Itineraries</h1>#}
+{#    <table>#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>Destination</th>#}
+{#                <th>How Many Places</th>#}
+{#                <th>Arrival Date</th>#}
+{#                <th>Departure Date</th>#}
+{#                <th>Places</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#            {% for itinerary in itineraries %}#}
+{#            <tr>#}
+{#                <td>{{ itinerary.destination }}</td>#}
+{#                <td>{{ itinerary.how_many }}</td>#}
+{#                <td>{{ itinerary.arrival_date.strftime('%Y-%m-%d') }}</td>#}
+{#                <td>{{ itinerary.departure_date.strftime('%Y-%m-%d') }}</td>#}
+{#                <td>#}
+{#                    <ul>#}
+{#                        {% for place in itinerary.places %}#}
+{#                        <li>{{ place.properties.name }}</li>  <!-- Adjust according to your places structure -->#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+{#                </td>#}
+{#            </tr>#}
+{#            {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+{#</body>#}
+{#</html>#}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Itineraries</title>
+    <title>Your Itineraries</title>
+    <!-- Include Bootstrap for styling -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Your Itineraries</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Destination</th>
-                <th>How Many Places</th>
-                <th>Arrival Date</th>
-                <th>Departure Date</th>
-{#                <th>Places</th>#}
-            </tr>
-        </thead>
-        <tbody>
-            {% for itinerary in itineraries %}
-            <tr>
-                <td>{{ itinerary.destination }}</td>
-                <td>{{ itinerary.how_many }}</td>
-                <td>{{ itinerary.arrival_date.strftime('%Y-%m-%d') }}</td>
-                <td>{{ itinerary.departure_date.strftime('%Y-%m-%d') }}</td>
-                <td>
-                    <ul>
-                        {% for place in itinerary.places %}
-                        <li>{{ place.properties.name }}</li>  <!-- Adjust according to your places structure -->
-                        {% endfor %}
-                    </ul>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <!-- Container for the content -->
+    <div class="container mt-5">
+        <h1 class="mb-4">Your Itineraries</h1>
+
+        <!-- Check if there are itineraries to display -->
+        {% if itineraries %}
+            <div class="row">
+                <!-- Loop through each itinerary and display in a card format -->
+                {% for itinerary in itineraries %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img class="card-img-top"
+                             src="{{ itinerary.image_url or 'https://via.placeholder.com/400x200.png?text=Itinerary+Image' }}"
+                             alt="{{ itinerary.destination }} image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ itinerary.destination }}</h5>
+                            <p class="card-text">
+                                <strong>How Many Places:</strong> {{ itinerary.how_many }}<br>
+                                <strong>Arrival Date:</strong> {{ itinerary.arrival_date.strftime('%Y-%m-%d') }}<br>
+                                <strong>Departure Date:</strong> {{ itinerary.departure_date.strftime('%Y-%m-%d') }}
+                            </p>
+                            <!-- Display the list of places in the itinerary -->
+                            <ul class="list-group list-group-flush">
+                                {% for place in itinerary.places %}
+                                <li class="list-group-item">{{ place.properties.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No itineraries found. Start planning your trips!</p>
+        {% endif %}
+
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary mt-3">Back to Home</a>
+    </div>
+
+    <!-- Optional: Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

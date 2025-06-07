@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Optimizer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { margin-bottom: 20px; }
+        input, select { margin-bottom: 10px; padding: 5px; }
+        button { padding: 5px 10px; }
+    </style>
+</head>
+<body>
+    <h1>Route Optimizer</h1>
+
+    <form method="POST">
+        <label for="current_location">Enter your current location:</label>
+        <input type="text" id="current_location" name="current_location" required>
+        <br>
+
+        <label for="visited_places">Visited Places (optional, separate with commas):</label>
+        <input type="text" id="visited_places" name="visited_places" placeholder="Place1, Place2" value="{{ ', '.join(visited_places) }}">
+        <br>
+
+        <h3>Choose an option:</h3>
+        <input type="radio" id="option1" name="option" value="1" required>
+        <label for="option1">Recommend the nearest place</label><br>
+
+        <input type="radio" id="option2" name="option" value="2">
+        <label for="option2">Recommend a route</label><br>
+
+        <div id="route_input" style="display: none;">
+            <h4>Enter places for the route (separate with commas):</h4>
+            <input type="text" id="places" name="places" placeholder="Place1, Place2, Place3" required>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if nearest_place %}
+        <h3>The nearest place is: {{ nearest_place }}</h3>
+    {% endif %}
+
+    {% if route %}
+        <h3>Recommended Route: {{ ' -> '.join(route) }}</h3>
+    {% endif %}
+
+    <script>
+        // Show/hide route input based on option selection
+        document.querySelectorAll('input[name="option"]').forEach((elem) => {
+            elem.addEventListener("change", function() {
+                if (this.value == "2") {
+                    document.getElementById('route_input').style.display = "block";
+                } else {
+                    document.getElementById('route_input').style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -6,35 +6,35 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-   <!-- Include navbar if you have one -->
+    <!-- Include navbar if you have one -->
 
     <div class="container mt-5">
         <h1 class="mb-4">Most Popular Destinations</h1>
 
         <!-- Check if there are popular destinations to display -->
         {% if popular_destinations %}
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Destination Name</th>
-                        <th>Number of Selections</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Loop through the popular destinations and display them in the table -->
-                    {% for destination in popular_destinations %}
-                        <tr>
-                            <td>{{ destination.name }}</td>
-                            <td>{{ destination.count }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="card-deck">
+                <!-- Loop through the popular destinations and display them in cards -->
+                {% for destination in popular_destinations %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img class="card-img-top"
+                             src="{{ destination.image_url or 'https://via.placeholder.com/400x200.png?text=Destination+Image' }}"
+                             alt="{{ destination.name }} image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ destination.name }}</h5>
+                            <p class="card-text">{{ destination.description or 'Explore this beautiful destination.' }}</p>
+{#                            <p class="card-text"><small class="text-muted">Number of Selections: {{ destination.count }}</small></p>#}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         {% else %}
             <p>No popular destinations found. Start adding destinations to your itineraries!</p>
         {% endif %}
 
-        <a href="{{ url_for('home') }}" class="btn btn-primary mt-3">Back to Home</a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary mt-3">Back to Home</a>
     </div>
 
     <!-- Optional: Include Bootstrap JS and dependencies if using Bootstrap -->

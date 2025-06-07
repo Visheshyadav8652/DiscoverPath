@@ -15,9 +15,12 @@
 
         <nav class="navbar">
             <a href="#home">Home</a>
-            <a href="#book">Book</a>
-            <a href="#packages">Packages</a>
-            <a href="#contact">Contact Us</a>
+            <a href="#book">Plan</a>
+            <a href="{{ url_for('clusters') }}">Explore</a>
+            <a href="{{ url_for('popular_recommendations') }}">Popular</a>
+            <a href="{{ url_for('recommendations') }}">Recommended</a>
+            <a href="{{ url_for('similarity') }}">Find More</a>
+
         </nav>
 
         <div class="icons">
@@ -327,11 +330,6 @@
         </div>
     </section>
 
-    <section>
-        <div>
-            <iframe src="https://www.ftd.travel/travel-widgets/destination-of-the-day.php" target="_blank" align="middle" width="476" height="350"  frameborder="0" scrolling="no"></iframe>
-        </div>
-    </section>
 
     <!-- contact section -->
     <section class="contact" id="contact">

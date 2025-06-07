@@ -1,0 +1,360 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Travel Recommendation</title>#}
+{#    <style>#}
+{#        body {#}
+{#            font-family: Arial, sans-serif;#}
+{#            background-color: #f4f4f4;#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#        }#}
+{#        .container {#}
+{#            max-width: 600px;#}
+{#            margin: 50px auto;#}
+{#            padding: 20px;#}
+{#            background-color: #fff;#}
+{#            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);#}
+{#            border-radius: 8px;#}
+{#        }#}
+{#        h1 {#}
+{#            text-align: center;#}
+{#            color: #333;#}
+{#        }#}
+{#        label {#}
+{#            font-weight: bold;#}
+{#            margin-top: 10px;#}
+{#        }#}
+{#        input, select {#}
+{#            width: 100%;#}
+{#            padding: 8px;#}
+{#            margin: 10px 0;#}
+{#            border-radius: 4px;#}
+{#            border: 1px solid #ccc;#}
+{#        }#}
+{#        .btn {#}
+{#            width: 100%;#}
+{#            padding: 10px;#}
+{#            background-color: #28a745;#}
+{#            color: white;#}
+{#            border: none;#}
+{#            border-radius: 4px;#}
+{#            cursor: pointer;#}
+{#        }#}
+{#        .btn:hover {#}
+{#            background-color: #218838;#}
+{#        }#}
+{#        .result {#}
+{#            margin-top: 20px;#}
+{#            padding: 10px;#}
+{#            background-color: #e9ecef;#}
+{#            border-radius: 4px;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#<div class="container">#}
+{#    <h1>Travel Recommendation System</h1>#}
+{#    #}
+{#    <!-- Option 1: Recommend Nearest Place -->#}
+{#    <h2>Find Nearest Place(Here To Where)</h2>#}
+{#    <form id="nearest-place-form">#}
+{#        <label for="location-nearest">Enter your current location:</label>#}
+{#        <input type="text" id="location-nearest" name="location" placeholder="e.g., Mumbai" required>#}
+{##}
+{#        <label for="visited-places">Enter places you've already visited (comma separated):</label>#}
+{#        <input type="text" id="visited-places" name="visited_places" placeholder="e.g., Place1, Place2, Place3" required>#}
+{##}
+{#        <button type="submit" class="btn">Find Nearest Place</button>#}
+{#    </form>#}
+{##}
+{#    <div class="result" id="nearest-result"></div>#}
+{#    #}
+{#    <!-- Option 2: Recommend Route -->#}
+{#    <h2>Recommend Route</h2>#}
+{#    <form id="recommendation-form">#}
+{#        <label for="location">Enter your current location:</label>#}
+{#        <input type="text" id="location" name="location" placeholder="e.g., Mumbai" required>#}
+{##}
+{#        <label for="places">Enter 3 places you'd like to visit:</label>#}
+{#        <input type="text" id="place1" name="place1" placeholder="Place 1" required>#}
+{#        <input type="text" id="place2" name="place2" placeholder="Place 2" required>#}
+{#        <input type="text" id="place3" name="place3" placeholder="Place 3" required>#}
+{##}
+{#        <button type="submit" class="btn">Recommend Route</button>#}
+{#    </form>#}
+{##}
+{#    <div class="result" id="route-result"></div>#}
+{#</div>#}
+{##}
+{#<script>#}
+{#    // Option 1: Nearest Place#}
+{#    document.getElementById("nearest-place-form").addEventListener("submit", function(event) {#}
+{#        event.preventDefault();#}
+{#        const location = document.getElementById("location-nearest").value;#}
+{#        const visited_places = document.getElementById("visited-places").value.split(',');#}
+{##}
+{#        fetch('/recommend_nearest_place', {#}
+{#            method: 'POST',#}
+{#            headers: {#}
+{#                'Content-Type': 'application/json'#}
+{#            },#}
+{#            body: JSON.stringify({#}
+{#                location: location,#}
+{#                visited_places: visited_places.map(place => place.trim())#}
+{#            })#}
+{#        })#}
+{#        .then(response => response.json())#}
+{#        .then(data => {#}
+{#            if (data.error) {#}
+{#                document.getElementById("nearest-result").innerHTML = "Error: " + data.error;#}
+{#            } else if (data.message) {#}
+{#                document.getElementById("nearest-result").innerHTML = data.message;#}
+{#            } else {#}
+{#                document.getElementById("nearest-result").innerHTML = "Nearest Place: " + data.nearest_place ;#}
+{#            }#}
+{#        })#}
+{#        .catch(error => {#}
+{#            console.error('Error:', error);#}
+{#        });#}
+{#    });#}
+{##}
+{#    // Option 2: Recommend Route#}
+{#    document.getElementById("recommendation-form").addEventListener("submit", function(event) {#}
+{#        event.preventDefault();#}
+{#        const location = document.getElementById("location").value;#}
+{#        const place1 = document.getElementById("place1").value;#}
+{#        const place2 = document.getElementById("place2").value;#}
+{#        const place3 = document.getElementById("place3").value;#}
+{##}
+{#        fetch('/recommend_route', {#}
+{#            method: 'POST',#}
+{#            headers: {#}
+{#                'Content-Type': 'application/json'#}
+{#            },#}
+{#            body: JSON.stringify({#}
+{#                location: location,#}
+{#                places: [place1, place2, place3]#}
+{#            })#}
+{#        })#}
+{#        .then(response => response.json())#}
+{#        .then(data => {#}
+{#            document.getElementById("route-result").innerHTML = "Recommended Route: " + data.route;#}
+{#        })#}
+{#        .catch(error => {#}
+{#            console.error('Error:', error);#}
+{#        });#}
+{#    });#}
+{#</script>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Recommendation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        .place-card {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .place-card img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+        .place-info {
+            flex-grow: 1;
+        }
+        .arrow {
+            text-align: center;
+            font-size: 2em;
+            color: #007bff; /* Color for the arrows */
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Travel Recommendation System</h1>
+
+    <!-- Option 1: Recommend Nearest Place -->
+    <h2>Find Nearest Place</h2>
+    <form id="nearest-place-form">
+        <label for="location-nearest">Enter your current location:</label>
+        <input type="text" id="location-nearest" name="location" placeholder="e.g., Mumbai" required>
+
+        <label for="visited-places">Enter places you've already visited (comma separated):</label>
+        <input type="text" id="visited-places" name="visited_places" placeholder="e.g., Place1, Place2, Place3" required>
+
+        <button type="submit" class="btn">Find Nearest Place</button>
+    </form>
+
+    <div class="result" id="nearest-result"></div>
+
+    <!-- Option 2: Recommend Route -->
+    <h2>Recommend Route</h2>
+    <form id="recommendation-form">
+        <label for="location">Enter your current location:</label>
+        <input type="text" id="location" name="location" placeholder="e.g., Mumbai" required>
+
+        <label for="places">Enter 3 places you'd like to visit:</label>
+        <input type="text" id="place1" name="place1" placeholder="Place 1" required>
+        <input type="text" id="place2" name="place2" placeholder="Place 2" required>
+        <input type="text" id="place3" name="place3" placeholder="Place 3" required>
+
+        <button type="submit" class="btn">Recommend Route</button>
+    </form>
+
+    <div class="result" id="route-result"></div>
+</div>
+
+            <div class="text-center mt-4">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Home</a>
+            </div>
+
+<script>
+    // Option 1: Nearest Place with Image and Index
+    document.getElementById("nearest-place-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const location = document.getElementById("location-nearest").value;
+        const visited_places = document.getElementById("visited-places").value.split(',');
+
+        fetch('/recommend_nearest_place', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                location: location,
+                visited_places: visited_places.map(place => place.trim())
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                document.getElementById("nearest-result").innerHTML = "Error: " + data.error;
+            } else if (data.message) {
+                document.getElementById("nearest-result").innerHTML = data.message;
+            } else {
+                const resultDiv = document.getElementById("nearest-result");
+                resultDiv.innerHTML = `
+                    <div class="place-card">
+                        <img src="${data.image}" alt="${data.nearest_place}">
+                        <div class="place-info">
+                            <strong>${data.nearest_place}</strong> (Index: ${data.index})<br>
+                            Distance: ${data.distance} km
+                        </div>
+                    </div>`;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+
+    // Option 2: Recommended Route with Images, Indexes, and Arrows
+    document.getElementById("recommendation-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const location = document.getElementById("location").value;
+        const place1 = document.getElementById("place1").value;
+        const place2 = document.getElementById("place2").value;
+        const place3 = document.getElementById("place3").value;
+
+        fetch('/recommend_route', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                location: location,
+                places: [place1, place2, place3]
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const resultDiv = document.getElementById("route-result");
+            resultDiv.innerHTML = '';  // Clear previous result
+
+            data.route.forEach((place, index) => {
+                resultDiv.innerHTML += `
+                    <div class="place-card">
+                        <img src="${place.image}" alt="${place.place_name}">
+                        <div class="place-info">
+                            <strong>${place.place_name}</strong> (Index: ${place.index})<br>
+                        </div>
+                    </div>`;
+                // Add an arrow between places, except after the last place
+                if (index < data.route.length - 1) {
+                    resultDiv.innerHTML += '<div class="arrow">→</div>';
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+
+</body>
+</html>
+
+
+
